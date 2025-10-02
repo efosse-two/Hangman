@@ -1,3 +1,4 @@
+import pytest
 from game import load_word_list, hangman_word
 import os
 
@@ -16,10 +17,13 @@ def test_word_list_2():
     assert load_word_list(file_path) == ["mouse", "monkey"]
 
 
-
-def test_hangman_word():
-    assert hangman_word("sunny", []) == "_____"
-    assert hangman_word("sunny", ["l"]) == "_____"
-    assert hangman_word("sunny", ["s"]) == "s____"
-    assert hangman_word("sunny", ["l", "s"]) == "s____"
-    assert hangman_word("sunny", ["s", "n"]) == "s_nn_"
+@pytest.mark.parametrize("the_word, guesses, expected_result",
+                    [
+                        ("sunny", [], "_____"),
+                        ("sunny", ["l"], "_____"),
+                        ("sunny", ["s"], "s____"),
+                        ("sunny", ["l", "s"], "s____"),
+                        ("sunny", ["s", "n"], "s_nn_"),
+                    ])
+def test_hangman_word(the_word: str, guesses: list, expected_result: str):
+    assert hangman_word(the_word, guesses) == expected_result
