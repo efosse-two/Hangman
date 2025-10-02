@@ -28,3 +28,15 @@ def pick_word() -> str:
     word_list = load_word_list(file_path)
     the_word = random.choice(word_list)
     return the_word
+
+
+def hangman_word (the_word: str, guessed_letters: list) -> str:
+    result = ""
+    for letter in the_word:
+        if letter in guessed_letters:
+            result = result + letter
+        else:
+            result = result + "_"
+    return result
+
+
