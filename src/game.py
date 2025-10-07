@@ -39,4 +39,26 @@ def hangman_word (the_word: str, guessed_letters: list) -> str:
             result = result + "_"
     return result
 
+def get_user_guess(): #function to get input from the user
+    guess = input("Guess the letter: ") #Input skrives inn manuelt
+    return guess
+
+def play_hangman(the_word):
+    guessed_letters = []
+
+    while True:
+        print(hangman_word(the_word, guessed_letters)) #shows the current status for the user guesses
+
+        guess = get_user_guess()
+
+        if guess not in guessed_letters:
+            guessed_letters.append(guess) #puts guessed letters into a guessed list
+
+            if "_" not in hangman_word(the_word, guessed_letters):
+                print(hangman_word(the_word, guessed_letters)) #prints the current state of the guesses
+                print("Congrats!") #when the word is complete
+                break
+
+
+
 
