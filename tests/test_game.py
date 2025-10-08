@@ -28,16 +28,3 @@ def test_word_list_2():
 def test_hangman_word(the_word: str, guesses: list, expected_result: str):
     assert hangman_word(the_word, guesses) == expected_result
 
-
-def get_user_guess(): #function to get input from the user
-    guess = input("Guess the word!: ")
-    return guess
-#need to get back to this later
-
-def hangman_game():
-    guesses = []
-    user_guess = guesses
-
-    while True:
-        if user_guess in the_word:
-            print("")
