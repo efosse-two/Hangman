@@ -28,3 +28,4 @@ def test_word_list_2():
 def test_hangman_word(the_word: str, guesses: list, expected_result: str):
     assert hangman_word(the_word, guesses) == expected_result
 
+
