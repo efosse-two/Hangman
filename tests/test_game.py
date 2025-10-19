@@ -29,3 +29,14 @@ def test_hangman_word(the_word: str, guesses: list, expected_result: str):
     assert hangman_word(the_word, guesses) == expected_result
 
 
+
+def hangman_word (the_word: str, guessed_letters: list) -> str:
+    result = ""
+    for letter in the_word:
+        if letter in guessed_letters:
+            result = result + letter
+        else:
+            result = result + "_"
+    return result
+
+

@@ -34,20 +34,29 @@ def hangman_word (the_word: str, guessed_letters: list) -> str:
     result = ""
     for letter in the_word:
         if letter in guessed_letters:
-            result = result + letter
+            result += letter
         else:
-            result = result + "_"
+            result += "_"
     return result
 
 def get_user_guess(): #function to get input from the user, due to "input"
-    guess = input("Guess the letter: ") #Input skrives inn manuelt i console
+    guess = input("Guess a letter: ") #Input skrives inn manuelt i console
+
+    if len(guess) > 1:
+        return None
     return guess
 
 def play_hangman(the_word):
     guessed_letters = []
+    life = 3
 
-    while True:
+    while life > 0:
         guess = get_user_guess()
+        if guess is None:
+            life -= 1
+            print(f"Nice try you cheater! you lost one life, you have {life} lives left  - Guess only 1 letter!")
+            continue
+
 
         if guess not in guessed_letters:
             guessed_letters.append(guess) #puts guessed letters into a guessed list
@@ -55,7 +64,23 @@ def play_hangman(the_word):
             current_state = hangman_word(the_word, guessed_letters)
             print(current_state)  # shows the current status for the user guesses
 
+            if guess not in the_word:
+                life -= 1 #number of lives - 1
+
+                if life == 1:
+                    print(f"wrong letter, only {life} life left")
+                else: # if life is more or less than 1
+                    print(f"wrong letter, {life} lives left")
+
+                if life == 0:
+                    print(f"You lost!")
+                    break
+
+
+
             if "_" not in current_state:
-                print(current_state) #prints the current state/result of the guesses
                 print("Congrats!") #when the word is complete
                 break
+        else:
+            print("Are you stupid? This letter was already guessed")
+
